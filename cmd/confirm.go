@@ -1,7 +1,9 @@
 package cmd
 
 import (
+	"fmt"
 	"os"
+	"strings"
 
 	"github.com/jedib0t/go-pretty/v6/table"
 	"github.com/yxxhero/kubectl-confirm/pkg/kubectl"
@@ -35,6 +37,7 @@ func NewconfirmOptions(streams genericclioptions.IOStreams) *confirmOptions {
 
 func Run(streams genericclioptions.IOStreams) {
 
+	var choice string
 	if os.Getenv("KUBECTL_CONFIRM_DISABLE") == "" {
 		opt := NewconfirmOptions(streams)
 		if err := opt.Complete(); err != nil {
@@ -43,8 +46,13 @@ func Run(streams genericclioptions.IOStreams) {
 		if err := opt.Render(); err != nil {
 			util.CheckErr(err)
 		}
+		fmt.Printf("Continue (y/n):")
+		fmt.Scanln(&choice)
+		if strings.ToLower(choice) == "y" {
+			kubectl.Run()
+		}
+		return
 	}
-
 	kubectl.Run()
 }
 
