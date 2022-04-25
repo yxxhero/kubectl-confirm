@@ -1,7 +1,7 @@
 # kubectl-confirm
-Confirm before run kubectl. 
-This not a kubectl plugin.
-Add the logic of cluster information confirmation in kubectl default behavior.
+Confirm before run kubectl.   
+This not a kubectl plugin.   
+Add the logic of cluster information confirmation in kubectl default behavior.  
 
 
 # disable
